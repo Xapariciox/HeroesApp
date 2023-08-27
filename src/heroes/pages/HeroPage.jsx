@@ -5,7 +5,7 @@ import { useMemo } from "react";
 export const HeroPage = () => {
   const { id, ...rest } = useParams();
   const hero = useMemo(() => getHeroById(id), [id]);
-  const heroImageUrl = `/assets/heroes/${id}.jpg`;
+  const heroImageUrl = `../assets/heroes/${id}.jpg`;
   const navigate = useNavigate();
   const onNavigateBack = () => {
     navigate(-1);
