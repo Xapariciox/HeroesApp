@@ -1,0 +1,8 @@
+.marvel-spider {
+  view-transition-name: tuputamadre;
+}
+
+::view-transition-old(tuputamadre),
+::view-transition-new(tuputamadre) {
+  animation-duration: 1s;
+}

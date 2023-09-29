@@ -1,6 +1,7 @@
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { getHeroById } from "../helpers";
 import { useMemo } from "react";
+import { flushSync } from "react-dom";
 
 export const HeroPage = () => {
   const { id, ...rest } = useParams();
@@ -8,18 +9,22 @@ export const HeroPage = () => {
   const heroImageUrl = `../assets/heroes/${id}.jpg`;
   const navigate = useNavigate();
   const onNavigateBack = () => {
-    navigate(-1);
+    document.startViewTransition(() => {
+      flushSync(() => {
+        navigate("/marvel");
+      });
+    });
   };
   if (!hero) {
     return <Navigate to="/marvel" />;
   }
   return (
-    <div className="row mt-5 animate__animated animate__fadeInLeft">
+    <div className="row mt-5 ">
       <div className="col-4">
         <img
           src={`${heroImageUrl}`}
           alt={hero.superhero}
-          className="img-thumbnail "
+          className={`img-thumbnail ${id}`}
         />
       </div>
 
@@ -40,7 +45,7 @@ export const HeroPage = () => {
           </li>
         </ul>
 
-        <h5 className="mt-3"> Characteres</h5>
+        <h5 className="mt-3"> Characters</h5>
 
         <p>{hero.characters}</p>
 
